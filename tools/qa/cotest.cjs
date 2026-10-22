@@ -1,0 +1,13 @@
+const {chromium}=require('playwright');
+(async()=>{const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium'});const errs=[];
+const p=await b.newPage({viewport:{width:1366,height:900}});p.on('pageerror',e=>errs.push(e.message));
+await p.goto('http://localhost:4173/#shop');await p.waitForTimeout(600);
+const btns=await p.$$('.card .btn');await btns[0].click();await btns[1].click();await p.waitForTimeout(300);
+await p.click('.bagbtn:not(.menubtn)');await p.waitForTimeout(500);await p.click('.drawer .btn--primary');await p.waitForTimeout(600);
+console.log('hash',await p.evaluate(()=>location.hash));
+await p.click('button[type=submit]');await p.waitForTimeout(200);console.log('errors shown',await p.$$eval('.err',e=>e.length));
+await p.screenshot({path:'shots/co1.png',fullPage:true});
+await p.fill('[name=email]','a@b.co');await p.fill('[name=name]','Jeff');await p.fill('[name=street]','1 Main St');await p.fill('[name=city]','Boston');await p.fill('[name=zip]','02110');
+await p.fill('[name=card]','4242 4242 4242 4242');await p.fill('[name=exp]','12/28');await p.fill('[name=cvc]','123');
+await p.click('button[type=submit]');await p.waitForTimeout(500);await p.screenshot({path:'shots/co2.png'});
+console.log(await p.textContent('h1'));console.log('errs',errs);await b.close()})();

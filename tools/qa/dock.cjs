@@ -1,0 +1,10 @@
+const {chromium}=require('playwright');
+(async()=>{const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium'});const errs=[];
+const p=await b.newPage({viewport:{width:1280,height:900}});p.on('pageerror',e=>errs.push(e.message));
+await p.goto('http://localhost:4173/');await p.waitForTimeout(800);
+const l=await p.$$('nav.links a');const bx=await l[3].boundingBox();await p.mouse.move(bx.x+bx.width/2,bx.y+bx.height/2);await p.waitForTimeout(500);
+await p.screenshot({path:'shots/dock.png',clip:{x:400,y:40,width:880,height:80}});
+const m=await b.newPage({viewport:{width:390,height:844}});m.on('pageerror',e=>errs.push(e.message));await m.goto('http://localhost:4173/#holiday');await m.waitForTimeout(900);
+await m.screenshot({path:'shots/tabs.png',clip:{x:0,y:760,width:390,height:84}});
+await m.click('.tab:last-child');await m.waitForTimeout(700);await m.screenshot({path:'shots/sheet.png'});
+console.log(errs);await b.close()})();
