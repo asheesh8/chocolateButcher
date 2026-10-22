@@ -24,7 +24,7 @@ function Pick({ title, text, handle }: { title: string; text: string; handle: st
         <div className="row" style={{ gap: 10 }}>
           <Link to={{ page: "product", handle }} className="link">{p.short}</Link>
           <span className="price" style={{ fontSize: 17 }}>{moneyShort(p.price)}</span>
-          <button className="btn btn--sm" onClick={() => { add(handle); toast(`Added ${p.short} to your bag`); }}>Add</button>
+          <button className="btn btn--sm btn--add" onClick={() => { add(handle); toast(`Added ${p.short} to your bag`); }}><span className="btn__t">Add</span><span className="btn__i" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 8h14l-1.2 12H6.2z" /><path d="M9 8V6a3 3 0 0 1 6 0v2" /><path className="plus" d="M12 11.5v5M9.5 14h5" /></svg></span></button>
         </div>
       </div>
     </article>

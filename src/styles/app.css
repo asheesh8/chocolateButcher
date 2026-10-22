@@ -767,3 +767,55 @@ footer.foot ul.inline { flex-direction: row; flex-wrap: wrap; gap: 6px 18px; }
 .town__time { background: none; border: 0; border-radius: 0; padding: 0; font-weight: 400; color: var(--cleaver); }
 .confirm__thanks { font-size: clamp(44px, 7vw, 64px); color: var(--cleaver); transform: rotate(-4deg); line-height: 1; }
 .truffle .peek { border-radius: 6px; box-shadow: 0 3px 0 var(--ink); }
+
+/* ---- Buttons, round 3: printed-ticket set ----
+   Primary: red ticket on an ink "misregistered" backing frame; it presses into register.
+   Secondary: cream ticket; kraft fills up from the bottom like chocolate into a mould.
+   Add: label + bag stamp; the stamp slides over the label on hover. */
+.btn, .btn--primary { --off: 6px; isolation: isolate; overflow: visible; box-shadow: none; margin: 0 var(--off) var(--off) 0; border: 2px solid var(--ink); border-radius: 4px; background: #fffaf0; color: var(--ink); transition: transform 180ms cubic-bezier(.3,.7,.2,1), color 220ms ease; }
+.btn::before { content: ""; position: absolute; inset: -2px; z-index: -2; border: 1.5px solid var(--ink); border-radius: 4px; background: repeating-linear-gradient(-45deg, transparent 0 3px, rgba(42,26,20,.22) 3px 4px); transform: translate(var(--off), var(--off)); transition: transform 180ms cubic-bezier(.3,.7,.2,1); pointer-events: none; }
+.btn::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 2px; background: #fffaf0; pointer-events: none; }
+.btn--primary { color: #fff; }
+.btn--primary::after { background: var(--cleaver); }
+.btn--primary::before { background: var(--sun); }
+.btn:hover, .btn--primary:hover { background: #fffaf0; color: var(--ink); box-shadow: none; transform: translate(-2px, -2px); }
+.btn--primary:hover { color: #fff; }
+.btn:hover::before { transform: translate(calc(var(--off) + 2px), calc(var(--off) + 2px)); }
+.btn:active, .btn--primary:active { box-shadow: none; transform: translate(var(--off), var(--off)); transition-duration: 60ms; }
+.btn:active::before { transform: translate(0, 0); transition-duration: 60ms; }
+.btn:disabled, .btn:disabled:hover { opacity: .45; transform: none; box-shadow: none; }
+.btn:disabled::before { transform: translate(var(--off), var(--off)); }
+
+/* secondary: kraft pour */
+.btn:not(.btn--primary):not(.btn--add) { overflow: hidden; margin: 0 var(--off) var(--off) 0; }
+.btn:not(.btn--primary):not(.btn--add)::before { display: none; }
+.btn:not(.btn--primary):not(.btn--add) { box-shadow: var(--off) var(--off) 0 -1px #f5ead8, var(--off) var(--off) 0 0 var(--ink); }
+.btn:not(.btn--primary):not(.btn--add)::after { top: auto; height: 260%; bottom: 0; inset-inline: -10%; background: var(--sun); border-radius: 50% 50% 0 0 / 22% 22% 0 0; transform: translateY(100%); transition: transform 420ms cubic-bezier(.3,.7,.2,1), border-radius 420ms ease; }
+.btn:not(.btn--primary):not(.btn--add):hover { box-shadow: calc(var(--off) + 2px) calc(var(--off) + 2px) 0 -1px #f5ead8, calc(var(--off) + 2px) calc(var(--off) + 2px) 0 0 var(--ink); }
+.btn:not(.btn--primary):not(.btn--add):hover::after { transform: translateY(58%); border-radius: 0; }
+.btn:not(.btn--primary):not(.btn--add):active { box-shadow: 0 0 0 0 var(--ink); }
+
+/* add to bag: stamp slides across */
+.btn--add { --off: 4px; padding: 0 0 0 14px; gap: 0; overflow: hidden; }
+.btn--add::before { display: none; }
+.btn--add { box-shadow: var(--off) var(--off) 0 -1px #f5ead8, var(--off) var(--off) 0 0 var(--ink); }
+.btn--add:hover { box-shadow: calc(var(--off) + 2px) calc(var(--off) + 2px) 0 -1px #f5ead8, calc(var(--off) + 2px) calc(var(--off) + 2px) 0 0 var(--ink); }
+.btn--add:active { box-shadow: none; }
+.btn--add .btn__t { padding-right: 54px; transition: transform 260ms cubic-bezier(.3,.7,.2,1), opacity 200ms ease; white-space: nowrap; }
+.btn--add .btn__i { position: absolute; right: 0; top: 0; bottom: 0; width: 42px; background: var(--cleaver); color: #fff; border-left: 2px solid var(--ink); transition: width 260ms cubic-bezier(.3,.7,.2,1); }
+.btn--add .btn__i svg { position: absolute; top: calc(50% - 11px); right: 9px; transition: right 260ms cubic-bezier(.3,.7,.2,1); }
+.btn--add .plus { transition: transform 260ms ease; transform-origin: 12px 14px; }
+.btn--add:hover .btn__i { width: 100%; }
+.btn--add:hover .btn__i svg { right: calc(50% - 11px); }
+.btn--add:hover .plus { transform: rotate(90deg); }
+.btn--add:hover .btn__t { transform: translateX(-30%); opacity: 0; }
+.btn--add:active .btn__i { background: var(--ink); }
+.card__foot .btn--add { justify-content: space-between; }
+
+.btn:focus-visible { outline: 3px solid var(--sun); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  .btn, .btn::before, .btn::after, .btn--add .btn__i, .btn--add .btn__t, .btn--add .plus { transition: none !important; }
+  .btn:hover, .btn:hover::before { transform: none; }
+}
+.btn { white-space: nowrap; }
+@media (max-width: 760px) { .btn, .btn--primary { padding-inline: 18px; font-size: 21px; } .btn--add { padding: 0 0 0 12px; } .hero .row { gap: 12px !important; } }
