@@ -819,3 +819,33 @@ footer.foot ul.inline { flex-direction: row; flex-wrap: wrap; gap: 6px 18px; }
 }
 .btn { white-space: nowrap; }
 @media (max-width: 760px) { .btn, .btn--primary { padding-inline: 18px; font-size: 21px; } .btn--add { padding: 0 0 0 12px; } .hero .row { gap: 12px !important; } }
+
+/* maple rating v2: in flow above the counter, leaf + caption side by side */
+.hero__side { display: flex; flex-direction: column; align-items: center; min-width: 0; }
+.hero__side .hero__counter { width: 100%; }
+.maple--hero { position: relative; left: auto; top: auto; z-index: 2; width: auto; display: flex; align-items: center; gap: 14px; transform: none; animation: maple-in2 .8s .9s both cubic-bezier(.2,.8,.2,1); margin-bottom: 8px; }
+.maple--hero .maple__leaf { width: 104px; flex: none; transform: rotate(-6deg); }
+.maple--hero:hover .maple__leaf { transform: rotate(2deg) scale(1.04); }
+.maple--hero .maple__text { top: 30px; left: 0; width: 104px; justify-items: center; }
+.maple--hero .maple__text b { font-size: 36px; }
+.maple__side { display: grid; gap: 4px; text-align: left; }
+.maple__side i { font-style: normal; font-size: 18px; letter-spacing: .14em; color: var(--cleaver); line-height: 1; }
+.maple--hero .maple__cap { margin: 0; font-size: 15px; }
+@keyframes maple-in2 { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .maple--hero { animation: none; } }
+@media (max-width: 860px) {
+  .maple--hero { width: auto; margin: 8px 0 0; }
+  .maple--hero .maple__leaf, .maple--hero .maple__text { width: 84px; }
+  .maple--hero .maple__text { top: 24px; }
+  .maple--hero .maple__text b { font-size: 30px; }
+  .maple__side i { font-size: 15px; }
+  .maple--hero .maple__cap { font-size: 13px; }
+}
+@media (min-width: 861px) {
+  .maple--hero { margin-bottom: clamp(-110px, -6.5vw, -40px); gap: 18px; }
+  .maple--hero .maple__leaf, .maple--hero .maple__text { width: 136px; }
+  .maple--hero .maple__text { top: 40px; }
+  .maple--hero .maple__text b { font-size: 46px; }
+  .maple__side i { font-size: 22px; }
+  .maple--hero .maple__cap { font-size: 16px; }
+}

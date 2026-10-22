@@ -67,7 +67,6 @@ function Counter() {
           </motion.div>
         );
       })}
-      <MapleRating className="maple--hero" />
     </div>
   );
 }
@@ -123,7 +122,10 @@ export function Home() {
               <span>Chop Shop open <b>Wed–Sun, 12–7</b></span>
             </div>
           </div>
-          <Counter />
+          <div className="hero__side">
+            <MapleRating className="maple--hero" />
+            <Counter />
+          </div>
         </div>
       </section>
 

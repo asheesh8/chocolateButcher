@@ -32,9 +32,11 @@ export function MapleRating({ className = "" }: { className?: string }) {
       </svg>
       <span className="maple__text">
         <b>{RATING.value.toFixed(1)}</b>
-        <i aria-hidden="true">★★★★★</i>
       </span>
-      <span className="maple__cap">{RATING.count} Google reviews</span>
+      <span className="maple__side">
+        <i aria-hidden="true">★★★★★</i>
+        <span className="maple__cap">{RATING.count} Google reviews</span>
+      </span>
     </Link>
   );
 }
